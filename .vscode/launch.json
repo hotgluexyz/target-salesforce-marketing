@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "target-salesforce-marketing",
+            "type": "python",
+            "request": "launch",
+            "justMyCode": false,
+            "program": "../target_salesforce_marketing/target.py",
+            "cwd": "/Users/areeb/Documents/Projects/target-salesforce-marketing/.secrets",
+            "args": [
+                "<",
+                "data.singer",
+                "--config",
+                "config.json"
+            ],
+            "console": "integratedTerminal",
+            "python": "/Users/areeb/Documents/Projects/target-salesforce-marketing/.venv/bin/python"
+        }
+    ]
+}
