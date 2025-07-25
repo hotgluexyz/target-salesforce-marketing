@@ -41,13 +41,19 @@ class FallbackSink(SalesForceMarketingSink):
             params={"$search": self.name, "$pagesize": 1}
         )
         
-        items = response.json()['items']
+        try:
+            items = response.json()['items']
+        except Exception as e:
+            self.logger.error(f"Error getting data extension {self.name}: {e}")
+            return {'error': f"Error getting data extension {self.name}: {e}"}
 
         if len(items) == 0:
+            self.logger.error(f"Data extension {self.name} not found")
             return {'error': f"Data extension {self.name} not found"}
         
         item = items[0]
         if item.get('name') != self.name:
+            self.logger.error(f"Data extension {self.name} not found")
             return {'error': f"Data extension {self.name} not found"}
         
         return {
@@ -76,8 +82,12 @@ class FallbackSink(SalesForceMarketingSink):
             headers={"content-type": "application/json"}
         )
 
-        response_json = response.json()
-        request_id = response_json.get("requestId")
+        try:
+            response_json = response.json()
+            request_id = response_json.get("requestId")
+        except Exception as e:
+            self.logger.error(f"Error upserting record.", extra={"DEId": record["DEId"], "record": record, "error": e})
+            return None, False, {'error': f"Error upserting record: {e}"}
 
         state_updates = dict()
         return request_id, True, state_updates
