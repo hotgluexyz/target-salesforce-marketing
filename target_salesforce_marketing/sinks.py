@@ -21,11 +21,11 @@ class ContactsSink(SalesForceMarketingSink):
         state_updates = dict()
 
         if record:
-            vendor = self.request_api(
+            contact = self.request_api(
                 "POST", endpoint=self.endpoint, request_data=record
             )
-            vendor_id = vendor.json()["contactID"]
-            return vendor_id, True, state_updates
+            contact_id = contact.json()["contactID"]
+            return contact_id, True, state_updates
 
 class FallbackSink(SalesForceMarketingSink):
     """SalesForceMarketing target sink class."""
