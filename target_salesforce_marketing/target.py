@@ -8,6 +8,7 @@ from target_hotglue.target import TargetHotglue
 
 from target_salesforce_marketing.sinks import (
     ContactsSink,
+    FallbackSink,
 )
 
 
@@ -44,9 +45,7 @@ class TargetSalesForceMarketing(Target, TargetHotglue):
             if sink_class.name.lower() == stream_name.lower():
                 return sink_class
 
-            # Search for streams with multiple names
-            if stream_name.lower() in sink_class.available_names:
-                return sink_class
+        return FallbackSink
 
 
 if __name__ == "__main__":
