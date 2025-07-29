@@ -20,7 +20,7 @@ class SalesForceMarketingSink(HotglueSink, RecordSink):
 
     @property
     def base_url(self) -> str:
-        return self._config.get("rest_url")
+        return f"https://{self._config['sub_domain']}.rest.marketingcloudapis.com"
     
     @property
     def authenticator(self):

@@ -33,7 +33,7 @@ class SalesForceMarketingAuthenticator(Authenticator):
         return (int(expires_at) - now) > 120
 
     def update_access_token(self) -> None:
-        token_url = self._config["auth_base_uri"].rstrip("/") + "/v2/token"
+        token_url = f"https://{self._config['sub_domain']}.auth.marketingcloudapis.com/v2/token"
         payload = {
             "grant_type": "client_credentials",
             "client_id": self._config["client_id"],

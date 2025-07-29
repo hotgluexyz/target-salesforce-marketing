@@ -32,12 +32,6 @@ class TargetSalesForceMarketing(Target, TargetHotglue):
         th.Property("client_id", th.StringType, required=True),
         th.Property("client_secret", th.StringType, required=True),
         th.Property("sub_domain", th.StringType, required=True),
-        th.Property("auth_base_uri", th.StringType, required=True),
-        th.Property("rest_url", th.StringType, required=True),
-        th.Property("soap_base_uri", th.StringType, required=True),
-        th.Property("access_token", th.StringType, required=True),
-        th.Property("expires_in", th.IntegerType, required=True),
-        th.Property("access_token_expires_at", th.IntegerType, required=False),
     ).to_dict()
 
     def get_sink_class(self, stream_name: str):
