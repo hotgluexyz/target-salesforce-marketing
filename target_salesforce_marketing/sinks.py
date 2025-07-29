@@ -1,9 +1,5 @@
 """SalesForceMarketing target sink class, which handles writing streams."""
 
-from __future__ import annotations
-
-from __future__ import annotations
-
 from target_salesforce_marketing.client import SalesForceMarketingSink
 
 class ContactsSink(SalesForceMarketingSink):

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from singer_sdk import typing as th
-from singer_sdk.target_base import Target
 from target_hotglue.target import TargetHotglue
 
 from target_salesforce_marketing.sinks import (
@@ -12,7 +11,7 @@ from target_salesforce_marketing.sinks import (
 )
 
 
-class TargetSalesForceMarketing(Target, TargetHotglue):
+class TargetSalesForceMarketing(TargetHotglue):
     """Sample target for SalesForceMarketing."""
 
     name = "target-salesforce-marketing"
@@ -22,9 +21,10 @@ class TargetSalesForceMarketing(Target, TargetHotglue):
         config=None,
         parse_env_config: bool = False,
         validate_config: bool = True,
+        state: str = None
     ) -> None:
         self.config_file = config[0]
-        super().__init__(config, parse_env_config, validate_config)
+        super().__init__(config, parse_env_config, validate_config, state)
 
     SINK_TYPES = [ContactsSink]
     MAX_PARALLELISM = 1
